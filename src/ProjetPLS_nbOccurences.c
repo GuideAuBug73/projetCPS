@@ -2,7 +2,12 @@
 #include <stdio.h>
 #include "header.h"
 
-int nbOccurences(char *fichier, int **nbOcc){
+tab_occur nbOccurences(char *fichier){
+  tab_occur tab;
+  tab.nbOccurences=0;
+  for(int i=0 ; i<256 ; i++){
+    tab.tab[i] = 0;
+  }
   // Tableau a initialiser et mettre à 0
   FILE* f = NULL;
   //lettre récupérée dans le fichier texte
@@ -13,13 +18,12 @@ int nbOccurences(char *fichier, int **nbOcc){
   if (f != NULL)
   {
     fscanf(f, "%c", &lettre);
-    nbOcc[lettre]++;
-    nbSymbole++;
+    tab.tab[lettre]++;
+    tab.nbOccurences++;
     while(!feof(f)){
       fscanf(f, "%c", &lettre);
-      nbOcc[lettre]++;
-      nbSymbole++;
-      printf("%d\n",nbOcc[lettre] );
+      tab.tab[lettre]++;
+      tab.nbOccurences++;
     }
   }
   else
@@ -27,43 +31,40 @@ int nbOccurences(char *fichier, int **nbOcc){
     // On affiche un message d'erreur si on veut
     printf("Impossible d'ouvrir le fichier test.txt");
   }
-  printf("%d\n",nbSymbole );
-  return nbSymbole;
+  return tab;
 }
 
-pliste_t triTable(int nbOcc[]){
+pliste_t triTable(tab_occur tab){
   pliste_t liste=NULL ;
   pliste_t first;
   for(int i=0;i<256;i++){
-    if(nbOcc[i]!=0){
+    if(tab.tab[i]!=0){
       first=malloc(sizeof(pliste_t));
-      first->nom=i-'0';
-      first->nb=nbOcc[i];
+      first->nom=i;
+      first->nb=tab.tab[i];
       first->next=NULL;
       if(liste==NULL){
         liste=first;
       }else{
         pliste_t test=liste;
-        while(test!=NULL){
+        if(liste->nb>first->nb){
+          first->next=liste;
+          liste=first;
+        }else{
+        while(test->next!=NULL && test->next->nb<=first->nb){
           test=test->next;
         }
-        test=first;
-      }
+        first->next=test->next;
+        test->next=first;
+      }}
     }
   }
   return liste;
 }
 
 int main(){
-  int *nbOcc = malloc(256 * sizeof(int));
-  for(int i=0 ; i<256 ; i++){
-    nbOcc[i] = 0;
-  }
-  int nbSymbole =nbOccurences("../exemple/exem1.txt", &nbOcc);
-  for(int i=0 ; i<256 ; i++){
-    printf("%d ",nbOcc[i]);
-  }
-  pliste_t liste=triTable(nbOcc);
+  tab_occur tri =nbOccurences("../exemple/exem1.txt");
+  pliste_t liste=triTable(tri);
   while(liste!=NULL){
     printf("%c : %d\n",liste->nom,liste->nb );
     liste=liste->next;
