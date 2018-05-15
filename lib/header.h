@@ -1,3 +1,4 @@
+ 
 
 typedef struct l{
   char nom;
