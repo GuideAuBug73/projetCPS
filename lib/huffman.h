@@ -1,6 +1,5 @@
+
 typedef struct _noeud{
-    int p;
-    char *c;
     char s;
     int occ;
     struct _noeud *droit;
@@ -21,8 +20,8 @@ struct File {
   element *premier;
 };
 
-typedef struct l{
-  char nom;
-  int nb;
-  struct l* next;
-}liste_t,*pliste_t;
+
+arbre Construire_arbre_liste(pliste_t);
+void afficher_arbre(arbre,int);
+void afficher_file(File*);
+ 

@@ -13,16 +13,15 @@ tab_occur nbOccurences(char *fichier){
   //lettre récupérée dans le fichier texte
   char lettre;
   //nombre total de symbols dans le fichier txt
-  int nbSymbole=0;
   f = fopen(fichier,"r");
   if (f != NULL)
   {
     fscanf(f, "%c", &lettre);
-    tab.tab[lettre]++;
+    tab.tab[(int)lettre]++;
     tab.nbOccurences++;
     while(!feof(f)){
       fscanf(f, "%c", &lettre);
-      tab.tab[lettre]++;
+      tab.tab[(int)lettre]++;
       tab.nbOccurences++;
     }
   }
@@ -60,14 +59,4 @@ pliste_t triTable(tab_occur tab){
     }
   }
   return liste;
-}
-
-int main(){
-  tab_occur tri =nbOccurences("../exemple/exem1.txt");
-  pliste_t liste=triTable(tri);
-  while(liste!=NULL){
-    printf("%c : %d\n",liste->nom,liste->nb );
-    liste=liste->next;
-  }
-  return 0;
 }

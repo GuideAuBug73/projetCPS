@@ -1,5 +1,3 @@
- 
-
 typedef struct l{
   char nom;
   int nb;
@@ -10,3 +8,7 @@ typedef struct t{
   int nbOccurences;
   int tab[256];
 }tab_occur, *ptab_occur;
+
+
+tab_occur nbOccurences(char *);
+pliste_t triTable(tab_occur);
