@@ -36,7 +36,12 @@ pnoeud defiler_min(File *f){
       }
       courant = courant -> suivant;
     }
-    precedent -> suivant = element_min -> suivant;
+    if (precedent != element_min){
+      precedent -> suivant = element_min -> suivant;
+    }
+    else{
+      f->premier = element_min->suivant;
+    }
     return element_min->noeud;
   }
   else {
@@ -56,7 +61,13 @@ pnoeud allouer_noeud(){
   return nouveau;
 }
 
-
+void afficher_file(File *f){
+  element *courant = f->premier;
+  while(courant!=NULL){
+    printf("%i\n", courant->noeud->occ);
+    courant = courant->suivant;
+  }
+}
 
 arbre Construire_arbre_liste(pliste_t l){
   int i;
@@ -73,56 +84,51 @@ arbre Construire_arbre_liste(pliste_t l){
     enfiler(&f,n);
 
   }
-  afficher_file(&f);
+
   for(i=0;i<cpt-1;i++){
 
     n = allouer_noeud();
     n->gauche = defiler_min(&f);
-    printf("n->gauche->occ = %i\n",n->gauche->occ);
     n->droit = defiler_min(&f);
-    printf("n->droit->occ = %i\n",n->gauche->occ);
-
     if(n->droit == NULL){
-
     }
     n->occ = n->gauche->occ + n->droit->occ;
 
-    printf("n->occ = %i\n",n->occ);
     enfiler(&f,n);
   }
-  return n;//defiler_min(&f); //n
+  return defiler_min(&f); //n
 }
-void afficher_file(File *f){
-  element *courant = f->premier;
-  while(courant!=NULL){
-    printf("%i\n", courant->noeud->occ);
-    courant = courant->suivant;
-  }
-}
+
 void afficher_arbre(arbre a,int niveau){
   int i;
   if(a!=NULL){
-    afficher_arbre(a->droit,niveau++);
+    afficher_arbre(a->droit,niveau+1);
     for(i=0;i<niveau;i++){
       printf("\t");}
       printf("(%i) ",niveau);
-      printf("%i \n \n", a->occ);
+      printf("%i, [%c] \n \n", a->occ,a->s);
 
-      afficher_arbre(a->gauche,niveau++);
+      afficher_arbre(a->gauche,niveau+1);
     }
   }
   int main(void){
     liste_t l;
-    liste_t l2,l3;
+    liste_t l2,l3,l4,l5;
     l.nom = 'a';
     l.nb = 12;
     l.next = &l2;
     l2.nom = 'b';
-    l2.nb = 40;
+    l2.nb = 15;
     l2.next = &l3;
-    l3.nom = 'c';
-    l3.nb = 15;
-    l3.next = NULL;
+    l3.nom = 'd';
+    l3.nb = 27;
+    l3.next = &l4;
+    l4.nom = 'c';
+    l4.nb = 40;
+    l4.next = &l5;
+    l5.nom = 'e';
+    l5.nb = 41;
+    l5.next = NULL;
     arbre a = Construire_arbre_liste(&l);
     afficher_arbre(a,0);
   }
