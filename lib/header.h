@@ -10,5 +10,5 @@ typedef struct t{
 }tab_occur, *ptab_occur;
 
 
-tab_occur nbOccurences(char *);
+tab_occur nbOccurences(char *fichier);
 pliste_t triTable(tab_occur);

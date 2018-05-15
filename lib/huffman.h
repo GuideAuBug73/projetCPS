@@ -1,6 +1,7 @@
 
 typedef struct _noeud{
     char s;
+    char *c;
     int occ;
     struct _noeud *droit;
     struct _noeud *gauche;
@@ -24,4 +25,3 @@ struct File {
 arbre Construire_arbre_liste(pliste_t);
 void afficher_arbre(arbre,int);
 void afficher_file(File*);
- 
