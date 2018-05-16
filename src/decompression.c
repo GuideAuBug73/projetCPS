@@ -76,21 +76,3 @@ enTete_t lectureTableLongueur(char *fichier){
   return entete;
 }
 
-
-int main(int argc, char *argv){
-  enTete_t entete;
-  entete = lectureTableLongueur("../exemple/256test.txt");
-  printf("Profondeur : %d\n", entete.profondeur);
-  printf("Tableau 1 :");
-  for(int i = 0 ; i < 10 ; i++){
-    printf("%d",entete.NbSymb[i]);
-  }
-  printf("\nTableau 2 :\n");
-  for(int i = 1; i < 10 ; i++){
-    for(int j = 0 ; j<strlen(entete.Symb[i]) ; j++ ){
-      printf("%c ",entete.Symb[i][j]);
-    }
-    printf("test\n");
-  }
-  return 0;
-}
