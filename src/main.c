@@ -1,4 +1,8 @@
 #include "header.h"
+<<<<<<< Updated upstream
+=======
+#include "huffman.h"
+>>>>>>> Stashed changes
 #include "Table.h"
 
 int main()
