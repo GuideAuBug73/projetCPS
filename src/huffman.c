@@ -1,9 +1,9 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "huffman.h"
 #include <math.h>
 #include <string.h>
-
 
 void enfiler(File *f, pnoeud n)
 {
@@ -139,9 +139,6 @@ arbre Construire_arbre_tablongueur(char** symb, int* nbsymb,int profondeur){
   int m;
   int i ;
   int p =0;
-  int c =0;
-  char s;
-  int k = 0;
   pnoeud courant;
   File *nouveaux = malloc(sizeof(File)*256);
   pnoeud *anciens = malloc(sizeof(pnoeud)*256);
@@ -167,4 +164,5 @@ arbre Construire_arbre_tablongueur(char** symb, int* nbsymb,int profondeur){
       i++ ;
     }
   }
+  return premier;
 }
