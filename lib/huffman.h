@@ -26,3 +26,8 @@ typedef struct l{
   int nb;
   struct l* next;
 }liste_t,*pliste_t;
+
+typedef struct _doublet{
+  char symb;
+  int code;
+}doublet, *pdoublet;

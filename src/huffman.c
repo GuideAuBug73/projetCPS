@@ -119,6 +119,7 @@ void afficher_arbre(arbre a,int niveau){
       printf("\t");
     }
     printf("(%i) ",niveau);
+
     printf("%i, [%c] \n \n", a->occ,a->s);
 
     afficher_arbre(a->gauche,niveau+1);
@@ -159,26 +160,4 @@ arbre Construire_arbre_tablongueur(char** symb, int* nbsymb,int profondeur){
       i++ ;
     }
   }
-}
-
-int main(void){
-  liste_t l;
-  liste_t l2,l3,l4,l5;
-  l.nom = 'a';
-  l.nb = 12;
-  l.next = &l2;
-  l2.nom = 'b';
-  l2.nb = 15;
-  l2.next = &l3;
-  l3.nom = 'd';
-  l3.nb = 27;
-  l3.next = &l4;
-  l4.nom = 'c';
-  l4.nb = 40;
-  l4.next = &l5;
-  l5.nom = 'e';
-  l5.nb = 41;
-  l5.next = NULL;
-  arbre a = Construire_arbre_liste(&l);
-  afficher_arbre(a,0);
 }
