@@ -14,6 +14,10 @@ int main()
     encodage(a); 
     afficher_post_encodage(a,0);
     pdoublet *tableau_codage = tableau_code(a);
+    printf("====== TABLEAU NON CANONIQUE ======\n");
     affichage_codage(tableau_codage);
+    pdoublet *goodTab = tableau_change(tableau_codage);
+    printf("====== TABLEAU CANONIQUE ======\n");
+    affichage_codage(goodTab);
     return 0;   
 }
