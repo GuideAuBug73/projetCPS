@@ -1,22 +1,58 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 
-char *c="0110110000001111";
+char *c="011011000010000101011010";
 
 
-char*  save_file(char *c,int lg) {
-  char *fin;
+char*  convertion_charbin_to_char(char *c,int lg) {
+  char *fin=malloc(sizeof(char)*lg/8);
+  strcpy(fin,"");
   int nombre;
-  char tranfo_nombre;
-  char* tranfo;
-  for(int i=0;i<lg;i+8){
+  char tranfo;
+  char* tranfo_fin=malloc(sizeof(char));
+  for(int i=0;i<lg;i=i+8){
     nombre=0;
     for(int j=i;j<i+8 && j<lg;j++){
-      nombre+=c[j]-'0';
+      nombre+=(c[j]-'0')*pow(2,7-(j-i));
     }
-    tranfo_nombre=(char)nombre;
-    tranfo=(char*)tranfo_nombre;
-    fin=strcat(fin,tranfo);
+    printf("%d\n",nombre );
+    tranfo=(char)nombre;
+    tranfo_fin[0]=tranfo;
+    strcat(fin,tranfo_fin);
   }
+  return fin;
+}
+
+
+char* convertion_char_to_charbin(char* c,int lg){
+  char *fin=malloc(sizeof(char)*lg*8);
+  strcpy(fin,"");
+  int nombre;
+  int k;
+  char* tranfo;
+  for(int i=0;i<lg;i++){
+    nombre=c[i];
+    for(int j=7;j>=0;j--){
+      k=nombre>>j;
+      if(k&1){
+        tranfo="1";
+      }else{
+        tranfo="0";
+      }
+      strcat(fin,tranfo);
+    }
+  }
+  return fin;
+}
+
+int  main() {
+  printf("%s\n",c );
+  char* s=convertion_charbin_to_char(c,24);
+  printf("%d\n",strlen(s) );
+  printf("%s\n",s );
+  char* s2=convertion_char_to_charbin(s,3);
+  printf("%s\n",s2 );
 }

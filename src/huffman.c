@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "huffman.h"
 
 
 void enfiler(File *f, pnoeud n)
@@ -126,4 +127,3 @@ void afficher_arbre(arbre a, int niveau)
     afficher_arbre(a->gauche, niveau+1);
   }
 }
-

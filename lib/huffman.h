@@ -1,5 +1,6 @@
 #ifndef HUFFMAN_H
 #define HUFFMAN_H
+#include "header.h"
 typedef struct _noeud{
     char s;
     char *c;
