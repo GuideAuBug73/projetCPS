@@ -47,12 +47,3 @@ char* convertion_char_to_charbin(char* c,int lg){
   }
   return fin;
 }
-
-int  main() {
-  printf("%s\n",c );
-  char* s=convertion_charbin_to_char(c,24);
-  printf("%d\n",strlen(s) );
-  printf("%s\n",s );
-  char* s2=convertion_char_to_charbin(s,3);
-  printf("%s\n",s2 );
-}
