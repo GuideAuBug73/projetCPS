@@ -91,6 +91,21 @@ void afficher_file(File *f){
   }
 }
 
+void afficher_arbre(arbre a,int niveau){
+  int i;
+  if(a!=NULL){
+    afficher_arbre(a->droit,niveau+1);
+    for(i=0;i<niveau;i++){
+      printf("\t");
+    }
+    printf("(%i) ",niveau);
+
+    printf(" [%c] \n \n",a->s);
+
+    afficher_arbre(a->gauche,niveau+1);
+  }
+}
+
 arbre Construire_arbre_liste(pliste_t l){
   int i;
   File f;
@@ -118,20 +133,7 @@ arbre Construire_arbre_liste(pliste_t l){
   return defiler_min(&f); //n
 }
 
-void afficher_arbre(arbre a,int niveau){
-  int i;
-  if(a!=NULL){
-    afficher_arbre(a->droit,niveau+1);
-    for(i=0;i<niveau;i++){
-      printf("\t");
-    }
-    printf("(%i) ",niveau);
 
-    printf("%i, [%c] \n \n", a->occ,a->s);
-
-    afficher_arbre(a->gauche,niveau+1);
-  }
-}
 
 
 
@@ -139,16 +141,15 @@ arbre Construire_arbre_tablongueur(char** symb, int* nbsymb,int profondeur){
   int m;
   int i ;
   int p =0;
-  int c =0;
-  char s;
-  int k = 0;
   pnoeud courant;
+
   File *nouveaux = malloc(sizeof(File)*256);
   pnoeud *anciens = malloc(sizeof(pnoeud)*256);
+
   anciens[0] = allouer_noeud();
   pnoeud premier = anciens[0];
-  for(p =1;p<=profondeur;p++){
-  //  for(i=0;i<strlen(anciens);i++){
+  for(p =0;p<profondeur;p++){
+  //  afficher_arbre(premier,0);
     i = 0;
     while(anciens[i]!=NULL){
       anciens[i]->droit = allouer_noeud();
@@ -161,10 +162,21 @@ arbre Construire_arbre_tablongueur(char** symb, int* nbsymb,int profondeur){
       courant = defiler(nouveaux);
       courant->s = symb[p][m];
     }
-    i = 0 ;
+
+    i = 0;
     while(nouveaux->premier!=NULL){
       anciens[i] = defiler(nouveaux);
       i++ ;
     }
   }
+  return premier;
+}
+
+char **createArray(int m, int n) {
+  char **rows = malloc(m * sizeof(char *));
+  for (int i = 0; i < m; ++i) {
+    char *values = malloc(n * sizeof(char));
+    rows[i] = values;
+  }
+  return rows;
 }
