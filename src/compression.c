@@ -20,8 +20,3 @@ char*  save_file(char *c,int lg) {
     fin=strcat(fin,tranfo);
   }
 }
-
-int main(){
-  char *s=save_file(c,16);
-  printf("%s\n", s);
-}

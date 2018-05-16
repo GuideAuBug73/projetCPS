@@ -2,6 +2,8 @@
 #include "huffman.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
 int feuille(pnoeud a)
@@ -34,18 +36,18 @@ void encodage_rec(pnoeud a)
 {
   if (a->gauche != NULL)
   {
-    char *tempg = a->c;
-    a->c = strcat(a->c, "1");
-    a->gauche->c = a->c;
-    a->c = tempg;
+    char *tempg = malloc(sizeof(char)*(strlen(a->c)+1));
+		strcpy(tempg,a->c);
+    strcat(tempg, "1");
+    a->gauche->c = tempg;
     encodage_rec(a->gauche);
   }
   if (a->droit != NULL)
   {
-    char *tempg = a->c;
-    a->c = strcat(a->c, "0");
-    a->droit->c = a->c;
-    a->c = tempg;
+		char *tempd = malloc(sizeof(char)*(strlen(a->c)+1));
+		strcpy(tempd,a->c);
+    strcat(tempd, "0");
+    a->droit->c = tempd;
     encodage_rec(a->droit);
   }
 }

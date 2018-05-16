@@ -11,7 +11,7 @@ int main()
     arbre a = Construire_arbre_liste(liste);
     afficher_arbre(a,0);
     encodage(a);
-   /* printf("OK");
-    afficher_post_encodage(a,0);*/
+   printf("OK");
+    afficher_post_encodage(a,0);
     return 0;
 }
