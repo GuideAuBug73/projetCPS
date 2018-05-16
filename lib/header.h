@@ -1,3 +1,5 @@
+#ifndef HEADER_H
+#define HEADER_H
 typedef struct l{
   char nom;
   int nb;
@@ -12,3 +14,4 @@ typedef struct t{
 
 tab_occur nbOccurences(char *fichier);
 pliste_t triTable(tab_occur);
+#endif

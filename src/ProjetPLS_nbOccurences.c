@@ -24,7 +24,7 @@ tab_occur nbOccurences(char *fichier){
       tab.tab[(int)lettre]++;
       tab.nbOccurences++;
     }
-  f.fclose();
+  fclose(f);
   }
   else
   {

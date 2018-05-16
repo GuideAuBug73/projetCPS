@@ -128,3 +128,4 @@ void afficher_arbre(arbre a, int niveau)
     afficher_arbre(a->gauche, niveau+1);
   }
 }
+

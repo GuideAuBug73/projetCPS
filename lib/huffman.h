@@ -1,4 +1,5 @@
-
+#ifndef HUFFMAN_H
+#define HUFFMAN_H
 typedef struct _noeud{
     char s;
     char *c;
@@ -25,3 +26,4 @@ struct File {
 arbre Construire_arbre_liste(pliste_t);
 void afficher_arbre(arbre,int);
 void afficher_file(File*);
+#endif
