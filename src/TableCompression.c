@@ -19,19 +19,6 @@ int feuille(pnoeud a)
   }
 }
 
-int hauteur_arbre(pnoeud a)
-{
-  if (a == NULL)
-  {
-    return 0;
-  }
-  if (feuille(a))
-  {
-    return 1;
-  }
-  return 1 + max(hauteur_arbre(a->gauche), hauteur_arbre(a->droit));
-}
-
 void encodage_rec(pnoeud a)
 {
   if (a->gauche != NULL)

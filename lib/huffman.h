@@ -24,11 +24,6 @@ struct File {
 };
 
 
-typedef struct _doublet{
-  char symb;
-  int code;
-}doublet, *pdoublet;
-
 arbre Construire_arbre_liste(pliste_t);
 void afficher_arbre(arbre,int);
 void afficher_file(File*);
