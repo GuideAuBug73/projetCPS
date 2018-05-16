@@ -47,3 +47,51 @@ char* convertion_char_to_charbin(char* c,int lg){
   }
   return fin;
 }
+
+
+char * creer_entete(pdoublet** symb){
+  char*fin=malloc(sizeof(char)*256);
+  for(int init=0;init<256;init++){
+    fin[init]=0;
+  }
+  for(int i=0;i<256;i++){
+    int k=0;
+    int j=0;
+    while(tab[j] != NULL){
+      while(tab[j][k].symb != '\0'){
+        if(i==tab[j][k].symb){
+          fin[i]=j;
+        }
+        k++;
+      }
+      k = 0;
+      j++;
+    }
+
+  }
+}
+
+
+void save_compression(char* entete,char* data){
+  FILE* file=fopen("../exemple/compression.pen");
+  int taille_entete=strlen(entete);
+  int taille_data=strlen(data);
+  for(int i=0;i<taille_entete;i++){
+    fprintf(file, "%s",entete[i] );
+    fputs("",file);
+  }
+  for(int j=0;j<taille_data;j++){
+    fprintf(file, "%s",data[j] );
+  }
+  fclose(file);
+}
+
+
+void save_compression(char* data){
+  FILE* file=fopen("../exemple/decompression.pen");
+  int taille_data=strlen(data);
+  for(int j=0;j<taille_data;j++){
+    fprintf(file, "%s",data[j] );
+  }
+  fclose(file);
+}

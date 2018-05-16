@@ -42,7 +42,7 @@ int hauteur_arbre (arbre a){
 
 pdoublet *tableau_code(arbre a){
   int h = hauteur_arbre(a);
-  pdoublet * tabdetab = malloc(sizeof(pdoublet)*h+1);
+  pdoublet * tabdetab = malloc(sizeof(pdoublet)*9);
   pdoublet tab;
   for(int i = 1; i < h;i++){
     tab = malloc(sizeof(doublet) *256);
