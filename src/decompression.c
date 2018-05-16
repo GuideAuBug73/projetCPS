@@ -3,9 +3,10 @@
 #include <stdio.h>
 #include <string.h>
 #include "decompression.h"
+#include "huffman.h"
 #define max(a,b) ((a)>(b)?(a):(b))
 
-char **createArray(int m, int n) {
+/*char **createArray(int m, int n) {
     char **rows = malloc(m * sizeof(char *));
     for (int i = 0; i < m; ++i) {
         char *values = malloc(n * sizeof(char));
@@ -13,7 +14,7 @@ char **createArray(int m, int n) {
     }
     return rows;
 }
-
+*/
 enTete_t lectureTableLongueur(char *fichier){
   enTete_t entete;
   FILE *f = NULL;
@@ -33,7 +34,7 @@ enTete_t lectureTableLongueur(char *fichier){
     profondeur = longueur;
     fscanf(f,"%d",&longueur);
     if(longueur!=0){
-      entete.NbSymb[longueur-1]++;
+      entete.NbSymb[longueur]++;
       profondeur = max(profondeur, longueur);
     }
     while(!feof(f)){
@@ -41,7 +42,7 @@ enTete_t lectureTableLongueur(char *fichier){
       if(longueur!=0){
         profondeur = max(profondeur, longueur);
         if(longueur != -1)
-          entete.NbSymb[longueur-1]++;
+          entete.NbSymb[longueur]++;
         longueur = -1;
       }
     }
@@ -76,7 +77,7 @@ enTete_t lectureTableLongueur(char *fichier){
   return entete;
 }
 
-
+/*
 int main(int argc, char *argv){
   enTete_t entete;
   entete = lectureTableLongueur("../exemple/256test.txt");
@@ -93,4 +94,4 @@ int main(int argc, char *argv){
     printf("test\n");
   }
   return 0;
-}
+}*/

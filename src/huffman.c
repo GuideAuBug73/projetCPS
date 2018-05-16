@@ -133,23 +133,18 @@ arbre Construire_arbre_liste(pliste_t l){
   return defiler_min(&f); //n
 }
 
-
-
-
-
 arbre Construire_arbre_tablongueur(char** symb, int* nbsymb,int profondeur){
   int m;
   int i ;
-  int p =0;
+  int p = 0;
   pnoeud courant;
-
   File *nouveaux = malloc(sizeof(File)*256);
+  nouveaux->premier = NULL;
   pnoeud *anciens = malloc(sizeof(pnoeud)*256);
-
   anciens[0] = allouer_noeud();
   pnoeud premier = anciens[0];
-  for(p =0;p<profondeur;p++){
-  //  afficher_arbre(premier,0);
+  for(p = 1;p<=profondeur;p++){
+    //  afficher_arbre(premier,0);
     i = 0;
     while(anciens[i]!=NULL){
       anciens[i]->droit = allouer_noeud();
