@@ -1,8 +1,6 @@
-
 #include <stdio.h>
 #include <stdlib.h>
-#include "huffman.h"
-#include "header.h"
+
 
 void enfiler(File *f, pnoeud n)
 {

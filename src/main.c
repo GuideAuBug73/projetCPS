@@ -3,6 +3,7 @@
 #include "huffman.h"
 #include "Table.h"
 
+
 int main()
 {
     tab_occur tri = nbOccurences("../exemple/exem1.txt");
