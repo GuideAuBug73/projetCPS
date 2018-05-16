@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "huffman.h"
+#include <math.h>
+#include <string.h>
 
 void enfiler(File *f, pnoeud n){
   element *nouveau = malloc(sizeof(element));
@@ -17,6 +19,20 @@ void enfiler(File *f, pnoeud n){
   else {
     f->premier = nouveau;
   }
+}
+
+pnoeud defiler(File *f){
+  if(f == NULL){
+    return NULL;
+  }
+  pnoeud n;
+  if(f->premier != NULL){
+    element *elementDefile = f->premier;
+    n = elementDefile->noeud;
+    f->premier = elementDefile->suivant;
+    free(elementDefile);
+  }
+  return n;
 }
 
 pnoeud defiler_min(File *f){
@@ -82,7 +98,6 @@ arbre Construire_arbre_liste(pliste_t l){
     n->occ = l->nb;
     l = l->next;
     enfiler(&f,n);
-
   }
 
   for(i=0;i<cpt-1;i++){
@@ -90,10 +105,7 @@ arbre Construire_arbre_liste(pliste_t l){
     n = allouer_noeud();
     n->gauche = defiler_min(&f);
     n->droit = defiler_min(&f);
-    if(n->droit == NULL){
-    }
     n->occ = n->gauche->occ + n->droit->occ;
-
     enfiler(&f,n);
   }
   return defiler_min(&f); //n
@@ -104,31 +116,69 @@ void afficher_arbre(arbre a,int niveau){
   if(a!=NULL){
     afficher_arbre(a->droit,niveau+1);
     for(i=0;i<niveau;i++){
-      printf("\t");}
-      printf("(%i) ",niveau);
-      printf("%i, [%c] \n \n", a->occ,a->s);
+      printf("\t");
+    }
+    printf("(%i) ",niveau);
+    printf("%i, [%c] \n \n", a->occ,a->s);
 
-      afficher_arbre(a->gauche,niveau+1);
+    afficher_arbre(a->gauche,niveau+1);
+  }
+}
+
+
+
+arbre Construire_arbre_tablongueur(char** symb, int* nbsymb,int profondeur){
+  int m;
+  int i ;
+  int p =0;
+  int c =0;
+  char s;
+  int k = 0;
+  pnoeud courant;
+  File *nouveaux = malloc(sizeof(File)*256);
+  pnoeud *anciens = malloc(sizeof(pnoeud)*256);
+  anciens[0] = allouer_noeud();
+  pnoeud premier = anciens[0];
+  for(p =1;p<=profondeur;p++){
+  //  for(i=0;i<strlen(anciens);i++){
+    i = 0;
+    while(anciens[i]!=NULL){
+      anciens[i]->droit = allouer_noeud();
+      enfiler(nouveaux,anciens[i]->droit);
+      anciens[i]->gauche = allouer_noeud();
+      enfiler(nouveaux,anciens[i]->gauche);
+      i++;
+    }
+    for(m = 0; m <nbsymb[p];m++){
+      courant = defiler(nouveaux);
+      courant->s = symb[p][m];
+    }
+    i = 0 ;
+    while(nouveaux->premier!=NULL){
+      anciens[i] = defiler(nouveaux);
+      i++ ;
     }
   }
-  int main(void){
-    liste_t l;
-    liste_t l2,l3,l4,l5;
-    l.nom = 'a';
-    l.nb = 12;
-    l.next = &l2;
-    l2.nom = 'b';
-    l2.nb = 15;
-    l2.next = &l3;
-    l3.nom = 'd';
-    l3.nb = 27;
-    l3.next = &l4;
-    l4.nom = 'c';
-    l4.nb = 40;
-    l4.next = &l5;
-    l5.nom = 'e';
-    l5.nb = 41;
-    l5.next = NULL;
-    arbre a = Construire_arbre_liste(&l);
-    afficher_arbre(a,0);
-  }
+}
+
+int main(void){
+  liste_t l;
+  liste_t l2,l3,l4,l5;
+  l.nom = 'a';
+  l.nb = 12;
+  l.next = &l2;
+  l2.nom = 'b';
+  l2.nb = 15;
+  l2.next = &l3;
+  l3.nom = 'd';
+  l3.nb = 27;
+  l3.next = &l4;
+  l4.nom = 'c';
+  l4.nb = 40;
+  l4.next = &l5;
+  l5.nom = 'e';
+  l5.nb = 41;
+  l5.next = NULL;
+  arbre a = Construire_arbre_liste(&l);
+  afficher_arbre(a,0);
+}
