@@ -154,6 +154,7 @@ void save_decompression(char* data){
 
 char* codage_texte(char* c,pdoublet* tab,int nbCarac){
   char*fin=malloc(sizeof(char)*nbCarac);
+  strcpy(fin,"");
   int k;
   int j;
   for(int i=0;i<strlen(c);i++){
@@ -174,6 +175,7 @@ char* codage_texte(char* c,pdoublet* tab,int nbCarac){
 }
 char* lecture_fichier(char* fichier,int taille){
   char* fin = malloc(sizeof(char)*taille);
+  strcpy(fin,"");
   FILE* f = NULL;
   char lettre;
   char* tranfo=malloc(sizeof(char));
