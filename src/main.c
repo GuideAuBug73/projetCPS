@@ -14,6 +14,7 @@ int main()
     encodage(a);
     afficher_post_encodage(a,0);
     pdoublet *tableau_codage = tableau_code(a);
+    printf("====== TABLEAU NON CANONIQUE ======\n");
     affichage_codage(tableau_codage);
     char* entete = creer_entete(tableau_codage);
     printf("\n\n\n");
@@ -31,4 +32,8 @@ printf("%s\n\n",codage );
     char* decompress = convertion_char_to_charbin(compress,strlen(compress));
     printf("%s\n\n",decompress );
     return 0;
+    pdoublet *goodTab = tableau_change(tableau_codage);
+    printf("====== TABLEAU CANONIQUE ======\n");
+    affichage_codage(goodTab);
+    return 0;   
 }

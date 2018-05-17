@@ -27,4 +27,6 @@ struct File {
 arbre Construire_arbre_liste(pliste_t);
 void afficher_arbre(arbre,int);
 void afficher_file(File*);
+char **createArray(int m, int n) ;
+arbre Construire_arbre_tablongueur(char** , int*,int );
 #endif
