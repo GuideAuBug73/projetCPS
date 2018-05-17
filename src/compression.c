@@ -136,8 +136,16 @@ char* RLE(char * entete){
 }
 
 
-void save_compression(char* entete,char* data,int caractereUtile){
-  FILE* file=fopen("../exemple/compression.pen","w");
+void save_compression(char* entete,char* data,int caractereUtile,char* name){
+  char name2[1000];
+  strcpy(name2,"");
+  int i=0;
+  while(i<strlen(name)-4){ //Boucle jusqu'au point de notre nom de fichier
+    name2[i]=name[i];   //Sauvegarde des caractères
+    i++;
+  }
+  strcat(name2,".pen");
+  FILE* file=fopen(name2,"w");
   int taille_entete=strlen(entete);
   int taille_data=strlen(data);
   fprintf(file, "%d",caractereUtile );
@@ -150,14 +158,20 @@ void save_compression(char* entete,char* data,int caractereUtile){
     fprintf(file, "%c",data[j] );
 
   }
-  printf("mamamama\n" );
   //fclose(file);
-  printf("papapaap\n" );
 }
 
 
-void save_decompression(char* data){
-  FILE* file=fopen("../exemple/decompression.txt","w");
+void save_decompression(char* data,char* name){
+  char* name2=malloc(sizeof(char)*1000);
+  strcpy(name2,"");
+  int i=0;
+  while(i<strlen(name)-4){ //Boucle jusqu'au point de notre nom de fichier
+    name2[i]=name[i];   //Sauvegarde des caractères
+    i++;
+  }
+  strcat(name2,".pen.txt");
+  FILE* file=fopen(name2,"w");
   int taille_data=strlen(data);
   for(int j=0;j<taille_data;j++){
     fprintf(file, "%c",data[j] );
