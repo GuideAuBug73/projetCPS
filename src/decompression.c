@@ -5,6 +5,10 @@
 #include "decompression.h"
 #define max(a,b) ((a)>(b)?(a):(b))
 
+
+
+
+
 char **createArray(int m, int n) {
     char **rows = malloc(m * sizeof(char *));
     for (int i = 0; i < m; ++i) {
@@ -76,7 +80,7 @@ enTete_t lectureTableLongueur(char *fichier){
   return entete;
 }
 
-
+/*
 int main(int argc, char *argv){
   enTete_t entete;
   entete = lectureTableLongueur("../exemple/256test.txt");
@@ -93,4 +97,4 @@ int main(int argc, char *argv){
     printf("test\n");
   }
   return 0;
-}
+} */

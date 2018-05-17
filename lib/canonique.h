@@ -1,5 +1,6 @@
 #ifndef CANONIQUE_H
 #define CANONIQUE_H
+#include "huffman.h"
 
 typedef struct _doublet{
   char symb;

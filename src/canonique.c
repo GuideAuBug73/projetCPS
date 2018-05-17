@@ -7,6 +7,7 @@
 
 #define max(a,b) ((a)>(b)?(a):(b))
 
+
 void parcours_largeur(arbre a, int level, pdoublet tab, int cpt)
 {
 
