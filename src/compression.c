@@ -128,7 +128,7 @@ void save_compression(char* entete,char* data,int caractereUtile){
   int taille_entete=strlen(entete);
   int taille_data=strlen(data);
   fprintf(file, "%d",caractereUtile );
-  fputs("\n",file);
+  fputs(" ",file);
   for(int i=0;i<taille_entete;i++){
     fprintf(file, "%c",entete[i] );
     }
@@ -192,6 +192,6 @@ char* lecture_fichier(char* fichier,int taille){
       strcat(fin,tranfo);
     }
   }
-  fclose(f);
+  //fclose(f);
   return fin;
 }
