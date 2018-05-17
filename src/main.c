@@ -5,6 +5,7 @@
 #include "canonique.h"
 #include "Table.h"
 #include "compression.h"
+#include "decompression.h"
 int main()
 {
     tab_occur tri = nbOccurences("../exemple/exem1.txt");
@@ -43,5 +44,6 @@ int main()
     printf("%s\n\n", decompress);
 
 
+    save_compression(entete,compress,tri.nbOccurences);
     return 0;
 }
