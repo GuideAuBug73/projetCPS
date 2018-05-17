@@ -24,7 +24,9 @@ enTete_t lectureTableLongueur(char *fichier)
 {
   enTete_t entete;
   FILE *f = NULL;
-  int longueur = -1;
+  int nombre = 0;
+  char longueur = -1, buffer=0;
+  int i = 1;
   int profondeur = 0;
   //longueur inferieur a 10
   int *NbSymb = malloc(9 * sizeof(int));
@@ -38,48 +40,55 @@ enTete_t lectureTableLongueur(char *fichier)
   //calcul premier tableau tab[0] correspond au niveau 1
   if (f != NULL)
   {
+    //recupération du nobre de nombre de symboles
+    fscanf(f, "%d", &nombre);
+    entete.nombreSymboles = nombre;
     //calcul profondeur + premier tableau
+    longueur = -1;
     profondeur = longueur;
-    fscanf(f, "%d", &longueur);
+    fscanf(f, "%c", &buffer);
+    fscanf(f, "%c", &longueur);
     if (longueur != 0)
     {
-      entete.NbSymb[longueur]++;
-      profondeur = max(profondeur, longueur);
+      entete.NbSymb[longueur-'0']++;
+      profondeur = max(profondeur, longueur-'0');
     }
-    while (!feof(f))
+    while (i<256)
     {
-      fscanf(f, "%d", &longueur);
+      fscanf(f, "%c", &longueur);
       if (longueur != 0)
       {
-        profondeur = max(profondeur, longueur);
+        profondeur = max(profondeur, longueur-'0');
         if (longueur != -1)
-          entete.NbSymb[longueur]++;
+          entete.NbSymb[longueur-'0']++;
         longueur = -1;
       }
+      i++;
     }
     entete.profondeur = profondeur;
-    fclose(f);
+    //fclose(f);
 
     //calcul deuxieme tableau
     f = fopen(fichier, "r");
-    int tete[256];
+    char tete[256];
     for (int i = 0; i < 256; i++)
     {
-      tete[i] = 0;
+      tete[i] = '0';
     }
+    fscanf(f,"%d", &nombre);
     for (int i = 0; i < 256; i++)
     {
-      fscanf(f, "%d", &longueur);
+      fscanf(f, "%c", &longueur);
       tete[i] = longueur;
     }
-    fclose(f);
+    //fclose(f);
     //f = fopen(fichier,"r");
     for (int i = 1; i <= entete.profondeur; i++)
     {
       int k = 0;
       for (int j = 0; j < 256; j++)
       {
-        if (tete[j] == i)
+        if (tete[j]-'0' == i)
         {
           //printf("i : %d k : %d j : %d\n",i,k,j);
           Symb[i][k] = j;

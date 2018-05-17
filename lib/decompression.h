@@ -1,4 +1,5 @@
 typedef struct n{
+  int nombreSymboles;
   int *NbSymb;
   char **Symb;
   int profondeur;

@@ -127,7 +127,7 @@ void save_compression(char* entete,char* data,int caractereUtile){
   int taille_entete=strlen(entete);
   int taille_data=strlen(data);
   fprintf(file, "%d",caractereUtile );
-  fputs("\n",file);
+  fputs(" ",file);
   for(int i=0;i<taille_entete;i++){
     fprintf(file, "%c",entete[i] );
     }
@@ -137,7 +137,7 @@ void save_compression(char* entete,char* data,int caractereUtile){
 
   }
   printf("mamamama\n" );
-  fclose(file);
+  //fclose(file);
   printf("papapaap\n" );
 }
 
@@ -148,7 +148,7 @@ void save_decompression(char* data){
   for(int j=0;j<taille_data;j++){
     fprintf(file, "%c",data[j] );
   }
-  fclose(file);
+  //fclose(file);
 }
 
 
@@ -191,6 +191,6 @@ char* lecture_fichier(char* fichier,int taille){
       strcat(fin,tranfo);
     }
   }
-  fclose(f);
+  //fclose(f);
   return fin;
 }
