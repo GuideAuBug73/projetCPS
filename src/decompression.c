@@ -6,10 +6,7 @@
 #include "huffman.h"
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
-
-
-
-
+/*
 char **createArray(int m, int n) {
     char **rows = malloc(m * sizeof(char *));
     for (int i = 0; i < m; ++i) {

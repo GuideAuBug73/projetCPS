@@ -167,6 +167,8 @@ arbre Construire_arbre_tablongueur(char** symb, int* nbsymb,int profondeur){
   return premier;
 }
 
+
+
 char **createArray(int m, int n) {
   char **rows = malloc(m * sizeof(char *));
   for (int i = 0; i < m; ++i) {
