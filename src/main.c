@@ -7,9 +7,13 @@
 #include "Table.h"
 #include "compression.h"
 #include "decompression.h"
-int main()
+int main(int argc, char *argv[])
 {
-    tab_occur tri = nbOccurences("../exemple/exem1.txt");
+    if(argc < 2){
+        printf("Rentrez le nom du fichier en paramètre d'entrée ! \n");
+        return 0;
+    }
+    tab_occur tri = nbOccurences(argv[1]);
     printf("  ____ ___  __  __ ____  ____  _____ ____ ____   ___  ____  \n");
     printf(" / ___/ _ \\|  \\/  |  _ \\|  _ \\| ____/ ___/ ___| / _ \\|  _ \\ \n");
     printf("| |  | | | | |\\/| | |_) | |_) |  _| \\___ \\___ \\| | | | |_) |\n");
@@ -17,13 +21,13 @@ int main()
     printf(" \\____\\___/|_|  |_|_|   |_| \\_\\_____|____/____/ \\___/|_| \\_\\\n");
 
     printf("\n%d\n", tri.nbOccurences);
-    pliste_t liste = triTable(tri);
+    pliste_t liste = triTable(tri); 
     arbre a = Construire_arbre_liste(liste);
     encodage(a);
     afficher_post_encodage(a, 0);
     int h = hauteur_arbre(a);
     pdoublet *tableau_codage = tableau_code(a);
-    printf("====== TABLEAU NON CANONIQUE ======\n");
+    printf("====== TABLEAU NON CANONIQUE ======\n"); 
     affichage_codage(tableau_codage);
     tableau_change(tableau_codage,h);
     printf("====== TABLEAU CANONIQUE ======\n");
@@ -36,7 +40,7 @@ int main()
     }
     printf("\n\n\n");
 
-    char *text = lecture_fichier("../exemple/exem1.txt", tri.nbOccurences);
+    char *text = lecture_fichier(argv[1], tri.nbOccurences);
     printf("%s\n\n", text);
     char *codage = codage_texte(text, tableau_codage, tri.nbOccurences);
     printf("%s\n\n", codage);

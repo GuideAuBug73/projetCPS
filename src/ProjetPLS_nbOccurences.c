@@ -29,7 +29,8 @@ tab_occur nbOccurences(char *fichier){
   else
   {
     // On affiche un message d'erreur si on veut
-    printf("Impossible d'ouvrir le fichier test.txt");
+    printf("Impossible d'ouvrir le fichier d'entrée\n");
+    exit(-1);
   }
   return tab;
 }
