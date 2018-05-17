@@ -6,11 +6,9 @@
 #include "huffman.h"
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
-
-
-
-
-/*char **createArray(int m, int n) {
+/*
+char **createArray(int m, int n) {
+>>>>>>> Stashed changes
     char **rows = malloc(m * sizeof(char *));
     for (int i = 0; i < m; ++i) {
         char *values = malloc(n * sizeof(char));
@@ -24,8 +22,9 @@ enTete_t lectureTableLongueur(char *fichier)
 {
   enTete_t entete;
   FILE *f = NULL;
-  int nombre = 0;
-  char longueur = -1, buffer=0;
+  int nombre = 0, index=0;
+  int longueur = -1;
+  char buffer=0;
   int i = 1;
   int profondeur = 0;
   //longueur inferieur a 10
@@ -47,20 +46,22 @@ enTete_t lectureTableLongueur(char *fichier)
     longueur = -1;
     profondeur = longueur;
     fscanf(f, "%c", &buffer);
-    fscanf(f, "%c", &longueur);
+    fscanf(f, "%d", &longueur);
+    fscanf(f, "%c", &buffer);
     if (longueur != 0)
     {
-      entete.NbSymb[longueur-'0']++;
-      profondeur = max(profondeur, longueur-'0');
+      entete.NbSymb[longueur]++;
+      profondeur = max(profondeur, longueur);
     }
     while (i<256)
     {
-      fscanf(f, "%c", &longueur);
+      fscanf(f, "%d", &longueur);
+      fscanf(f, "%c", &buffer);
       if (longueur != 0)
       {
-        profondeur = max(profondeur, longueur-'0');
+        profondeur = max(profondeur, longueur);
         if (longueur != -1)
-          entete.NbSymb[longueur-'0']++;
+          entete.NbSymb[longueur]++;
         longueur = -1;
       }
       i++;
@@ -70,15 +71,17 @@ enTete_t lectureTableLongueur(char *fichier)
 
     //calcul deuxieme tableau
     f = fopen(fichier, "r");
-    char tete[256];
+    int tete[256];
     for (int i = 0; i < 256; i++)
     {
-      tete[i] = '0';
+      tete[i] = 0;
     }
     fscanf(f,"%d", &nombre);
+    fscanf(f, "%c", &buffer);
     for (int i = 0; i < 256; i++)
     {
-      fscanf(f, "%c", &longueur);
+      fscanf(f, "%d", &longueur);
+      fscanf(f, "%c", &buffer);
       tete[i] = longueur;
     }
     //fclose(f);
@@ -88,7 +91,7 @@ enTete_t lectureTableLongueur(char *fichier)
       int k = 0;
       for (int j = 0; j < 256; j++)
       {
-        if (tete[j]-'0' == i)
+        if (tete[j] == i)
         {
           //printf("i : %d k : %d j : %d\n",i,k,j);
           Symb[i][k] = j;
@@ -97,12 +100,39 @@ enTete_t lectureTableLongueur(char *fichier)
       }
     }
     entete.Symb = Symb;
+    index = ftell(f);
+    entete.index = index;
     //fclose(f);
   }
   else
     printf("Impossible d'ouvrir le fichier test.txt");
   return entete;
 }
+
+
+char* recupData(int offset, char* fichier){
+  FILE *f = NULL;
+  char carac=-1;
+  f = fopen(fichier, "r");
+  fseek(f,offset,SEEK_SET);
+  char* data=malloc(sizeof(char));
+  if (f!=NULL){
+    int i=0;
+    while(!FEOF){
+      fscanf(f,"%c",&carac);
+      data[i]=carac;
+      i++;
+      /*char* tmp = malloc(sizeof(data)+1);
+      tmp=data;
+      data=malloc(sizeof(tmp));
+      data=tmp;
+      free(tmp);*/
+      data = realloc(data,sizeof(char));
+    }
+  }
+  return data;
+}
+
 
 char *decompression_final(char *tab, arbre a, int nbmots)
 {
@@ -127,21 +157,24 @@ char *decompression_final(char *tab, arbre a, int nbmots)
   }
   return message;
 }
+
 /*
 int main(int argc, char *argv){
-  enTete_t entete;
-  entete = lectureTableLongueur("../exemple/256test.txt");
-  printf("Profondeur : %d\n", entete.profondeur);
+  enTete_t entetes;
+  entetes = lectureTableLongueur("../exemple/compression.pen");
+  printf("Nombre de symbole : %d\n",entetes.nombreSymboles);
+  printf("Profondeur : %d\n", entetes.profondeur);
   printf("Tableau 1 :");
   for(int i = 0 ; i < 10 ; i++){
-    printf("%d",entete.NbSymb[i]);
+    printf("%d ",entetes.NbSymb[i]);
   }
   printf("\nTableau 2 :\n");
   for(int i = 1; i < 10 ; i++){
-    for(int j = 0 ; j<strlen(entete.Symb[i]) ; j++ ){
-      printf("%c ",entete.Symb[i][j]);
+    for(int j = 0 ; j<strlen(entetes.Symb[i]) ; j++ ){
+      printf("%c ",entetes.Symb[i][j]);
     }
     printf("test\n");
   }
   return 0;
-}*/
+}
+*/
