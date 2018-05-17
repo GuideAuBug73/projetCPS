@@ -20,14 +20,14 @@ int main()
     pliste_t liste = triTable(tri);
     arbre a = Construire_arbre_liste(liste);
     encodage(a);
-    afficher_post_encodage(a, 0);
+    //afficher_post_encodage(a, 0);
     int h = hauteur_arbre(a);
     pdoublet *tableau_codage = tableau_code(a);
     //printf("====== TABLEAU NON CANONIQUE ======\n");
     //affichage_codage(tableau_codage);
     tableau_change(tableau_codage,h);
     //printf("====== TABLEAU CANONIQUE ======\n");
-    //affichage_codage(tableau_codage);
+    affichage_codage(tableau_codage);
     char *entete = creer_entete(tableau_codage);
     /*for (int i = 0; i < 256; i++)
     {
@@ -37,15 +37,19 @@ int main()
 
     char *text = lecture_fichier("../exemple/exem1.txt", tri.nbOccurences);
     printf("%s\n\n", text);
-    char *codage = codage_texte(text, tableau_codage, tri.nbOccurences);
-    printf("%s\n\n", codage);
+    char *codage = codage_texte(text, tableau_codage, tri.nbOccurences*h);
+    printf("codage %s\n\n", codage);
     char *compress = convertion_charbin_to_char(codage, strlen(codage));
-    printf("%s\n\n", compress);
     save_compression(entete,compress,tri.nbOccurences,"../exemple/exem1.txt");
-    enTete_t tete = lectureTableLongueur("../exemple/exem1.pen");
-    char* data = recupData(tete.index,"../exemple/exem1.pen",tete);
+    enTete_t tete = lectureTableLongueur("../exemple/exem2.pen");
+    char* data = recupData(tete.index,"../exemple/exem2.pen",tete);
     arbre arb = Construire_arbre_tablongueur(tete.Symb,tete.NbSymb,tete.profondeur);
-    char* dataDecompres = decompression_final(data,arb,tete.nombreSymboles);
+    afficher_arbre(arb,0);
+    //afficher_arbre(arb,0);
+    char* data2=convertion_char_to_charbin(data,strlen(data));
+    printf("codage %s\n",data2 );
+    char* dataDecompres = decompression_final(data2,arb,tete.nombreSymboles);
+    printf("%s\n",dataDecompres );
     save_decompression(dataDecompres,"../exemple/exem1.txt");
 
 
