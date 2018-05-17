@@ -77,6 +77,50 @@ char * creer_entete(pdoublet* tab){
   return fin;
 }
 
+char* RLE(char * entete){
+  char* nouveau = malloc(sizeof(char)*513);
+  int i = 0;
+  int k = 0;
+  int j;
+  int cpt = 0 ;
+  char save;
+  while(i<256){
+    if(entete[i]==entete[i+1]){
+      j = i ;
+      save = entete[j];
+      cpt = 0;
+      i++;
+      while(entete[i+1] == entete[i]){
+        i++;
+        cpt ++;
+      }
+      nouveau[k]= entete[j];
+      nouveau[k+1] = ',';
+      nouveau[k+2] = entete[j];
+      nouveau[k+3] = ',';
+      k = k+4;
+      if (cpt>6){
+        nouveau[k] = (char)(cpt+'0');
+        k ++ ;
+      }
+      else{
+        for(int k=0;k<(cpt)*2;k=k+2){
+          nouveau[k] = save;
+          nouveau[k+1] = ',';
+        }
+      }
+    }
+    else {
+      nouveau[k] = entete[i];
+      nouveau[k+1] = ',';
+      k = k +2;
+      i++;
+    }
+  }
+  nouveau[k+1] = '\0';
+  return nouveau;
+}
+
 
 void save_compression(char* entete,char* data,int caractereUtile){
   FILE* file=fopen("../exemple/compression.pen","w");
