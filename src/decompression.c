@@ -132,7 +132,7 @@ char* recupData(int offset, char* fichier,enTete_t tete){
     printf("Ouverture de fichier impossible\n" );
   }
   return data;
-}*/
+}
 
 
 char *decompression_final(char *tab, arbre a, int nbmots)
