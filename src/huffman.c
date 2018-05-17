@@ -34,7 +34,7 @@ pnoeud defiler(File *f){
     element *elementDefile = f->premier;
     n = elementDefile->noeud;
     f->premier = elementDefile->suivant;
-    free(elementDefile);
+    //free(elementDefile);
   }
   return n;
 }
