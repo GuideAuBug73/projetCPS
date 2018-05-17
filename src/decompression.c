@@ -104,6 +104,31 @@ enTete_t lectureTableLongueur(char *fichier)
   return entete;
 }
 
+
+char* recupData(int offset, char* fichier){
+  FILE *f = NULL;
+  char carac=-1;
+  f = fopen(fichier, "r");
+  fseek(f,offset,SEEK_SET);
+  char* data=malloc(sizeof(char));
+  if (f!=NULL){
+    int i=0;
+    while(!FEOF){
+      fscanf(f,"%c",&carac);
+      data[i]=carac;
+      i++;
+      /*char* tmp = malloc(sizeof(data)+1);
+      tmp=data;
+      data=malloc(sizeof(tmp));
+      data=tmp;
+      free(tmp);*/
+      data = realloc(data,sizeof(char));
+    }
+  }
+  return data;
+}
+
+
 char *decompression_final(char *tab, arbre a, int nbmots)
 {
   pnoeud x = a;
