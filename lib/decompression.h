@@ -7,3 +7,6 @@ typedef struct n{
 }enTete_t, *penTete_t;
 
 enTete_t lectureTableLongueur(char *fichier);
+
+
+char* recupData(int offset, char* fichier,enTete_t tete);

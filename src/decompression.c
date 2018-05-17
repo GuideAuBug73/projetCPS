@@ -110,25 +110,21 @@ enTete_t lectureTableLongueur(char *fichier)
 }
 
 
-char* recupData(int offset, char* fichier){
+char* recupData(int offset, char* fichier,enTete_t tete){
   FILE *f = NULL;
   char carac=-1;
   f = fopen(fichier, "r");
-  fseek(f,offset,SEEK_SET);
-  char* data=malloc(sizeof(char));
+  fseek(f,offset+1,SEEK_SET);
+  char* data=malloc(tete.profondeur*tete.nombreSymboles);
   if (f!=NULL){
     int i=0;
-    while(!FEOF){
+    while(!feof(f)){
       fscanf(f,"%c",&carac);
       data[i]=carac;
       i++;
-      /*char* tmp = malloc(sizeof(data)+1);
-      tmp=data;
-      data=malloc(sizeof(tmp));
-      data=tmp;
-      free(tmp);*/
-      data = realloc(data,sizeof(char));
     }
+  }else{
+    printf("Ouverture de fichier impossible\n" );
   }
   return data;
 }
