@@ -53,19 +53,32 @@ char* convertion_char_to_charbin(char* c,int lg){
 
 char * creer_entete(pdoublet* tab){
   char*fin=malloc(sizeof(char)*256*4);
-  char* tranfo=malloc(sizeof(char));
+  char* tranfo=malloc(sizeof(char)*3);
   int k;
   int j;
+  char tempo;
   for(int i=0;i<256;i++){
     k=0;
     j=1;
     tranfo[0]='0';
+    tranfo[1]='\0';
     while(tab[j] != NULL){
       while(tab[j][k].symb != '\0'){
         //printf("%c , %c\n",i,tab[j][k].symb );
         if(i==tab[j][k].symb){
-          char c=j+48;
-          tranfo[0]=c;
+          if (j>=10&&j<100){
+            tranfo[0] = (char)(j/10+'0');
+            tranfo[1] = (char)(j%10+'0');
+            tranfo[2]='\0';
+          }
+          else if(j>=100){
+            tranfo[0] = (char)(j/100+'0');
+            tempo = j%100;
+            tranfo[1] = (char)(tempo/10+'0');
+            tranfo[2] = (char)(j%10+'0');
+          }else if(j<10){
+            tranfo[0]=(char)j+'0';
+          }
         }
         k++;
       }
