@@ -16,10 +16,10 @@ int main()
     pdoublet *tableau_codage = tableau_code(a);
     printf("====== TABLEAU NON CANONIQUE ======\n");
     affichage_codage(tableau_codage);
-    pdoublet *goodTab = tableau_change(tableau_codage);
+    tableau_change(tableau_codage);
     printf("====== TABLEAU CANONIQUE ======\n");
-    affichage_codage(goodTab);
-    char *entete = creer_entete(goodTab);
+    affichage_codage(tableau_codage);
+    char *entete = creer_entete(tableau_codage);
     printf("\n\n\n");
     for (int i = 0; i < 256; i++)
     {
@@ -29,7 +29,7 @@ int main()
 
     char *text = lecture_fichier("../exemple/exem1.txt", tri.nbOccurences);
     printf("%s\n\n", text);
-    char *codage = codage_texte(text, goodTab, tri.nbOccurences);
+    char *codage = codage_texte(text, tableau_codage, tri.nbOccurences);
     printf("%s\n\n", codage);
     char *compress = convertion_charbin_to_char(codage, strlen(codage));
     printf("%s\n\n", compress);

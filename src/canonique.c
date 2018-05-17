@@ -77,7 +77,7 @@ void tri(pdoublet T, int taille)
   }
 }
 
-pdoublet *tableau_change(pdoublet *tabdetab)
+void tableau_change(pdoublet *tabdetab)
 {
   int i;
   for (i = 0; i < 9; i++)
@@ -87,7 +87,6 @@ pdoublet *tableau_change(pdoublet *tabdetab)
       tri(tabdetab[i], 256);
     }
   }
-  return tabdetab;
 }
 
 void affichage_codage(pdoublet *tab)
