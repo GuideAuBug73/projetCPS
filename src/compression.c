@@ -78,18 +78,23 @@ char * creer_entete(pdoublet* tab){
 }
 
 
-void save_compression(char* entete,char* data){
+void save_compression(char* entete,char* data,int caractereUtile){
   FILE* file=fopen("../exemple/compression.pen","w");
   int taille_entete=strlen(entete);
   int taille_data=strlen(data);
+  fprintf(file, "%d",caractereUtile );
+  fputs("\n",file);
   for(int i=0;i<taille_entete;i++){
     fprintf(file, "%c",entete[i] );
-    fputs("",file);
-  }
-  for(int j=0;j<taille_data;j++){
+    }
+    fputs("\n",file);
+      for(int j=0;j<taille_data;j++){
     fprintf(file, "%c",data[j] );
+
   }
+  printf("mamamama\n" );
   fclose(file);
+  printf("papapaap\n" );
 }
 
 
@@ -140,5 +145,6 @@ char* lecture_fichier(char* fichier,int taille){
       strcat(fin,tranfo);
     }
   }
+  fclose(f);
   return fin;
 }

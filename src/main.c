@@ -26,14 +26,14 @@ int main()
     char* text = lecture_fichier("../exemple/exem1.txt",tri.nbOccurences);
     printf("%s\n\n",text );
     char* codage = codage_texte(text,tableau_codage,tri.nbOccurences);
-printf("%s\n\n",codage );
+    printf("%s\n\n",codage );
     char* compress = convertion_charbin_to_char(codage,strlen(codage));
     printf("%s\n\n",compress );
     char* decompress = convertion_char_to_charbin(compress,strlen(compress));
     printf("%s\n\n",decompress );
-    return 0;
-    pdoublet *goodTab = tableau_change(tableau_codage);
+    save_compression(entete,compress,tri.nbOccurences);
+    /*pdoublet *goodTab = tableau_change(tableau_codage);
     printf("====== TABLEAU CANONIQUE ======\n");
-    affichage_codage(goodTab);
-    return 0;   
+    affichage_codage(goodTab);*/
+    return 0;
 }
