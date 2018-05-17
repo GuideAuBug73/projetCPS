@@ -22,7 +22,7 @@ enTete_t lectureTableLongueur(char *fichier)
 {
   enTete_t entete;
   FILE *f = NULL;
-  int nombre = 0, index=0;
+  int nombre = 1, index=0;
   int longueur = -1;
   char buffer=0;
   int i = 1;
@@ -41,11 +41,11 @@ enTete_t lectureTableLongueur(char *fichier)
   {
     //recupération du nobre de nombre de symboles
     fscanf(f, "%d", &nombre);
+    fscanf(f, "%c", &buffer);
     entete.nombreSymboles = nombre;
     //calcul profondeur + premier tableau
     longueur = -1;
     profondeur = longueur;
-    fscanf(f, "%c", &buffer);
     fscanf(f, "%d", &longueur);
     fscanf(f, "%c", &buffer);
     if (longueur != 0)
@@ -114,12 +114,17 @@ char* recupData(int offset, char* fichier,enTete_t tete){
   FILE *f = NULL;
   char carac=-1;
   f = fopen(fichier, "r");
-  fseek(f,offset+1,SEEK_SET);
-  char* data=malloc(tete.profondeur*tete.nombreSymboles);
+  printf("%d\n",offset );
+  for(int i=0;i<offset+1;i++){
+    fscanf(f,"%c",&carac);
+  }
+  //fseek(f,offset+2,SEEK_SET);
+  char* data=malloc(sizeof(char)*tete.profondeur*tete.nombreSymboles);
   if (f!=NULL){
     int i=0;
     while(!feof(f)){
       fscanf(f,"%c",&carac);
+      //printf("%c\n",carac );
       data[i]=carac;
       i++;
     }
@@ -148,6 +153,7 @@ char *decompression_final(char *tab, arbre a, int nbmots)
       }
       k++;
     }
+    printf("%c\n",x->s );
     message[i] = x->s;
     x = a;
   }
