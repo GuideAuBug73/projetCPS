@@ -49,7 +49,7 @@ char* convertion_char_to_charbin(char* c,int lg){
   }
   return fin;
 }
-
+ 
 
 char * creer_entete(pdoublet* tab){
   char*fin=malloc(sizeof(char)*256);

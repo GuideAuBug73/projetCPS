@@ -9,16 +9,17 @@
 
 
 
-/*
-char **createArray(int m, int n) {
+
+/*char **createArray(int m, int n) {
     char **rows = malloc(m * sizeof(char *));
     for (int i = 0; i < m; ++i) {
         char *values = malloc(n * sizeof(char));
         rows[i] = values;
     }
     return rows;
-}
-*/
+}*/
+
+
 enTete_t lectureTableLongueur(char *fichier)
 {
   enTete_t entete;
