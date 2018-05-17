@@ -8,7 +8,13 @@
 int main()
 {
     tab_occur tri = nbOccurences("../exemple/exem1.txt");
-    printf("%d\n", tri.nbOccurences);
+    printf("  ____ ___  __  __ ____  ____  _____ ____ ____   ___  ____  \n");
+    printf(" / ___/ _ \\|  \\/  |  _ \\|  _ \\| ____/ ___/ ___| / _ \\|  _ \\ \n");
+    printf("| |  | | | | |\\/| | |_) | |_) |  _| \\___ \\___ \\| | | | |_) |\n");
+    printf("| |__| |_| | |  | |  __/|  _ <| |___ ___) |__) | |_| |  _ < \n");
+    printf(" \\____\\___/|_|  |_|_|   |_| \\_\\_____|____/____/ \\___/|_| \\_\\\n");
+
+    printf("\n%d\n", tri.nbOccurences);
     pliste_t liste = triTable(tri);
     arbre a = Construire_arbre_liste(liste);
     encodage(a);
@@ -35,7 +41,7 @@ int main()
     printf("%s\n\n", compress);
     char *decompress = convertion_char_to_charbin(compress, strlen(compress));
     printf("%s\n\n", decompress);
-    
+
 
     return 0;
 }
