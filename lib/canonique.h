@@ -8,7 +8,8 @@ typedef struct _doublet{
 }doublet, *pdoublet;
 
 pdoublet * tableau_code(arbre a);
-void tableau_change(pdoublet * tabdetab);
+void tableau_change(pdoublet * tabdetab, int taille);
 void affichage_codage(pdoublet* tab);
+int hauteur_arbre(arbre a);
 
 #endif

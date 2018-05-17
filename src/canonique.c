@@ -45,9 +45,10 @@ int hauteur_arbre(arbre a)
 
 pdoublet *tableau_code(arbre a)
 {
-  pdoublet *tabdetab = malloc(sizeof(pdoublet) * 9);
+  int h = hauteur_arbre(a);
+  pdoublet *tabdetab = malloc(sizeof(pdoublet) * h+1);
   pdoublet tab;
-  for (int i = 1; i < 8; i++)
+  for (int i = 1; i < h; i++)
   {
     tab = malloc(sizeof(doublet) * 256);
     parcours_largeur(a, i, tab, 0);
@@ -77,10 +78,11 @@ void tri(pdoublet T, int taille)
   }
 }
 
-void tableau_change(pdoublet *tabdetab)
+void tableau_change(pdoublet *tabdetab,int taille)
 {
   int i;
-  for (i = 0; i < 9; i++)
+
+  for (i = 0; i < taille; i++)
   {
     if (tabdetab[i] != NULL)
     {

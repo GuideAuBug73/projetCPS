@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "header.h"
 #include "huffman.h"
 #include "canonique.h"
@@ -13,10 +14,11 @@ int main()
     arbre a = Construire_arbre_liste(liste);
     encodage(a);
     afficher_post_encodage(a, 0);
+    int h = hauteur_arbre(a);
     pdoublet *tableau_codage = tableau_code(a);
     printf("====== TABLEAU NON CANONIQUE ======\n");
     affichage_codage(tableau_codage);
-    tableau_change(tableau_codage);
+    tableau_change(tableau_codage,h);
     printf("====== TABLEAU CANONIQUE ======\n");
     affichage_codage(tableau_codage);
     char *entete = creer_entete(tableau_codage);
@@ -33,9 +35,15 @@ int main()
     printf("%s\n\n", codage);
     char *compress = convertion_charbin_to_char(codage, strlen(codage));
     printf("%s\n\n", compress);
+    save_compression(entete,compress,tri.nbOccurences);
     char *decompress = convertion_char_to_charbin(compress, strlen(compress));
     printf("%s\n\n", decompress);
-    
 
+    free(tableau_codage);
+    free(a);
+    free(entete);
+    free(text);
+    free(codage);
+    free(compress);
     return 0;
 }
