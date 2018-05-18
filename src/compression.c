@@ -10,7 +10,7 @@ char *c="011011000010000101011010";
 
 char*  convertion_charbin_to_char(char *c,int lg) {
   printf("codage %s\n\n", c);
-  printf("%d , %d\n",strlen(c),lg);
+  printf("%lui , %d\n",strlen(c),lg);
   char *fin=malloc(sizeof(char)*lg/8);
   strcpy(fin,"");
   int nombre;
@@ -172,14 +172,19 @@ void save_compression(char* entete,char* data,int caractereUtile,char* name){
 
 
 void save_decompression(char* data,char* name){
-  char name2[strlen(name)+4];
+  char name2[strlen(name)+5];
   strcpy(name2,"");
   int i=0;
-  while(i<strlen(name)-4){ //Boucle jusqu'au point de notre nom de fichier
+  while(i<strlen(name)){ //Boucle jusqu'au point de notre nom de fichier
     name2[i]=name[i];   //Sauvegarde des caractères
     i++;
   }
-  strcat(name2,".pen.txt");
+  name2[i]='.';
+  name2[i+1]='t';
+  name2[i+2]='x';
+  name2[i+3]='t';
+  name2[i+4]='\0';
+  printf("%s\n", name2);
   FILE* file=fopen(name2,"w");
   int taille_data=strlen(data);
   for(int j=0;j<taille_data;j++){

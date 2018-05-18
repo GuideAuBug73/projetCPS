@@ -34,7 +34,7 @@ pnoeud defiler(File *f){
     element *elementDefile = f->premier;
     n = elementDefile->noeud;
     f->premier = elementDefile->suivant;
-    //free(elementDefile);
+    free(elementDefile);
   }
   return n;
 }
@@ -154,13 +154,20 @@ arbre Construire_arbre_tablongueur(char** symb, int* nbsymb,int profondeur){
       i++;
     }
     for(m = 0; m <nbsymb[p];m++){
+      printf("profondeur %i  %i\n",p,nbsymb[p]);
       courant = defiler(nouveaux);
       courant->s = symb[p][m];
+      printf("%c\n",courant->s);
+
     }
 
     i = 0;
+    for(int j = 0; j < 256;j++){
+      anciens[j] = NULL;
+    }
     while(nouveaux->premier!=NULL){
       anciens[i] = defiler(nouveaux);
+      printf("indice %i\n",i);
       i++ ;
     }
   }
