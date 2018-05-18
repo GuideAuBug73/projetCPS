@@ -28,7 +28,6 @@ int main(int argc, char *argv[])
         printf("| |__| |_| | |  | |  __/|  _ <| |___ ___) |__) | |_| |  _ < \n");
         printf(" \\____\\___/|_|  |_|_|   |_| \\_\\_____|____/____/ \\___/|_| \\_\\\n");
 
-        printf("\n%d\n", tri.nbOccurences);
         pliste_t liste = triTable(tri);
         arbre a = Construire_arbre_liste(liste);
         encodage(a);
@@ -41,7 +40,7 @@ int main(int argc, char *argv[])
         printf("====== TABLEAU CANONIQUE ======\n");
         affichage_codage(tableau_codage);
         char *entete = creer_entete(tableau_codage);
-        printf("\n\n\n");
+        printf("\n\n\nLISTE DE LONGUEUR DANS ENTETE ");
         for (int i = 0; i < 256; i++)
         {
             printf("%c", entete[i]);
@@ -49,9 +48,9 @@ int main(int argc, char *argv[])
         printf("\n\n\n"); 
 
         char *text = lecture_fichier(argv[2], tri.nbOccurences);
-        printf("%s\n\n", text);
+        printf(" Message : %s\n\n", text);
         char *codage = codage_texte(text, tableau_codage, tri.nbOccurences*h);
-        printf("%s\n\n", codage);
+        printf("Code : %s\n\n", codage);
         char *compress = convertion_charbin_to_char(codage, strlen(codage));
         printf("%s\n\n", compress);
         save_compression(entete, compress, tri.nbOccurences, argv[2]);

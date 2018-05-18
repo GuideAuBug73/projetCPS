@@ -129,7 +129,7 @@ char *decompression_final(char *tab, arbre a, int nbmots)
   pnoeud x = a;
   char *message = malloc(sizeof(char) * nbmots);
   int k = 0;
-  for (int i = 0; i < nbmots; i++)
+  for (int i = 0; i < nbmots - 1; i++)
   {
     while (x->gauche != NULL && x->droit != NULL)
     {
@@ -145,10 +145,11 @@ char *decompression_final(char *tab, arbre a, int nbmots)
       }
       k++;
     }
-    printf("%c\n", x->s);
+    printf("%c", x->s);
     message[i] = x->s;
     x = a;
   }
+  printf("\n");
   return message;
 }
 

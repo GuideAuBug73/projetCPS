@@ -9,8 +9,6 @@ char *c="011011000010000101011010";
 
 
 char*  convertion_charbin_to_char(char *c,int lg) {
-  printf("codage %s\n\n", c);
-  printf("%lu , %d\n",strlen(c),lg);
   char *fin=malloc(sizeof(char)*lg/8);
   strcpy(fin,"");
   int nombre;
