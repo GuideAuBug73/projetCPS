@@ -3,6 +3,7 @@
 #include "huffman.h"
 #include <math.h>
 #include <string.h>
+#define max(a, b) ((a) > (b) ? (a) : (b))
 
 
 void enfiler(File *f, pnoeud n)
@@ -109,6 +110,8 @@ void afficher_arbre(arbre a,int niveau){
 arbre Construire_arbre_liste(pliste_t l){
   int i;
   File f;
+  pnoeud noeud_min1;
+  pnoeud noeud_min2;
   f.premier = NULL;
   pnoeud n;
   int cpt = 0;
@@ -119,18 +122,31 @@ arbre Construire_arbre_liste(pliste_t l){
     n->s = l->nom;
     n->occ = l->nb;
     l = l->next;
+    n->p = 0 ;
     enfiler(&f,n);
   }
 
   for(i=0;i<cpt-1;i++){
 
     n = allouer_noeud();
-    n->gauche = defiler_min(&f);
-    n->droit = defiler_min(&f);
+
+    //  n->gauche = defiler_min(&f);
+    //  n->droit = defiler_min(&f);
+    noeud_min1 = defiler_min(&f);
+    noeud_min2 = defiler_min(&f);
+    if(noeud_min1->p>noeud_min2->p){
+      n->gauche = noeud_min1;
+      n->droit = noeud_min2;
+    }
+    else{
+      n->gauche = noeud_min2;
+      n->droit = noeud_min1;
+    }
     n->occ = n->gauche->occ + n->droit->occ;
+    n->p = 1 + max((n->gauche->p),(n->droit->p));
     enfiler(&f,n);
   }
-  return defiler_min(&f); //n
+  return defiler(&f); //n
 }
 
 arbre Construire_arbre_tablongueur(char** symb, int* nbsymb,int profondeur){
