@@ -10,7 +10,7 @@ char *c="011011000010000101011010";
 
 char*  convertion_charbin_to_char(char *c,int lg) {
   printf("codage %s\n\n", c);
-  printf("%lui , %d\n",strlen(c),lg);
+  printf("%lu , %d\n",strlen(c),lg);
   char *fin=malloc(sizeof(char)*lg/8);
   strcpy(fin,"");
   int nombre;
@@ -95,50 +95,201 @@ char * creer_entete(pdoublet* tab){
   return fin;
 }
 
+
 char* RLE(char * entete){
-  char* nouveau = malloc(sizeof(char)*513);
+  char sauvegarde[4];
+  char* nouveau = malloc(sizeof(char)*4*256);
   int i = 0;
   int k = 0;
-  int j;
+  int tempo;
   int cpt = 0 ;
-  char save;
-  while(i<256){
-    if(entete[i]==entete[i+1]){
-      j = i ;
-      save = entete[j];
+  while(i<strlen(entete)){
+    sauvegarde[0]= entete[i];
+    sauvegarde[1]= entete[i+1];
+    sauvegarde[2]= entete[i+2];
+    sauvegarde[3]= entete[i+3];
+    if((sauvegarde[1]==',')&&(sauvegarde[0])==(entete[i+2])){
       cpt = 0;
-      i++;
-      while(entete[i+1] == entete[i]){
-        i++;
+      i=i+2;
+      while((sauvegarde[1]==',')&&(sauvegarde[0])==(entete[i+2])){
+        i=i+2;
         cpt ++;
       }
-      nouveau[k]= entete[j];
+      i++;
+      nouveau[k]= sauvegarde[0];
       nouveau[k+1] = ',';
-      nouveau[k+2] = entete[j];
+      nouveau[k+2] = sauvegarde[0];
       nouveau[k+3] = ',';
       k = k+4;
-      if (cpt>6){
+      if (cpt>0&&cpt<10){
+        nouveau[k] = '+';
+        k++;
         nouveau[k] = (char)(cpt+'0');
-        k ++ ;
+        k++;
+        nouveau[k] = ',';
+        k++;
       }
-      else{
-        for(int k=0;k<(cpt)*2;k=k+2){
-          nouveau[k] = save;
-          nouveau[k+1] = ',';
-        }
+      if (cpt>=10&&cpt<100){
+        nouveau[k] = '+';
+        k++;
+        nouveau[k] = (char)(cpt/10 + '0');
+        k ++ ;
+        nouveau[k] = (char)(cpt%10 + '0');
+        k++;
+      }
+      else if(cpt>=100){
+        nouveau[k] = '+';
+        k++;
+        nouveau[k] = (char)(cpt/100 + '0');
+        k ++ ;
+        tempo = cpt%100;
+        nouveau[k] = (char)(tempo/10 + '0');
+        k++;
+        nouveau[k] = (char)(cpt%10 + '0');
+        k++;
       }
     }
+
+    else if((sauvegarde[0]!=',')&&(sauvegarde[1]!=',')&&(sauvegarde[2]==',')&&(sauvegarde[0]==entete[i+3])&&(sauvegarde[1]==entete[i+4])){
+      cpt = 0;
+      i = i+3;
+      while((entete[i]!='\0'&&entete[i+1]!='\0'&&entete[i+2]!='\0'&&entete[i+3]!='\0')&&(sauvegarde[0]!=',')&&(sauvegarde[1]!=',')&&(sauvegarde[2]==',')&&(sauvegarde[0]==entete[i+3])&&(sauvegarde[1]==entete[i+4])){
+        i=i+3;
+        cpt ++;
+      }
+      i = i + 3;
+      nouveau[k]= sauvegarde[0];
+      nouveau[k+1] = sauvegarde[1];
+      nouveau[k+2] = ',';
+      nouveau[k+3] = sauvegarde[0];
+      nouveau[k+4] = sauvegarde[1];
+      nouveau[k+5] = ',';
+      k = k+6;
+
+      if (cpt>1&&cpt<10){
+        nouveau[k] = '+';
+        k++;
+        nouveau[k] = (char)(cpt+'0');
+        k++;
+        nouveau[k] = ',';
+        k++;
+      }
+      if (cpt>=10&&cpt<100){
+        nouveau[k] = '+';
+        k++;
+        nouveau[k] = (char)(cpt/10+'0');
+        k ++ ;
+        nouveau[k] = (char)(cpt%10+'0');
+        k++;
+        nouveau[k] = ',';
+        k++;
+      }
+      else if(cpt>=100){
+        nouveau[k] = '+';
+        k++;
+        nouveau[k] = (char)(cpt/100+'0');
+        k ++ ;
+        tempo = cpt%100;
+        nouveau[k] = (char)(tempo/10+'0');
+        k++;
+        nouveau[k] = (char)(cpt%10+'0');
+        k++;
+        nouveau[k] = ',';
+        k++;
+      }
+    }
+
+    else if((sauvegarde[0]!=',')&&(sauvegarde[1]!=',')&&(sauvegarde[2]!=',')&&(sauvegarde[3]==',')&&(sauvegarde[0]==entete[i+4])&&(sauvegarde[1]==entete[i+5])&&(sauvegarde[2]==entete[i+6])){
+      cpt = 0;
+
+      i = i+4;
+      while((sauvegarde[0]!=',')&&(sauvegarde[1]!=',')&&(sauvegarde[2]!=',')&&(sauvegarde[3]==',')&&(sauvegarde[0]==entete[i+4])&&(sauvegarde[1]==entete[i+5])&&(sauvegarde[2]==entete[i+6])){
+        i=i+4;
+        cpt ++;
+      }
+      i = i+5;
+      nouveau[k]= sauvegarde[0];
+      nouveau[k+1] = sauvegarde[1];
+      nouveau[k+2] = sauvegarde[2];
+      nouveau[k+3] = ',';
+      nouveau[k+4] = sauvegarde[0];
+      nouveau[k+5] = sauvegarde[1];
+      nouveau[k+6] = sauvegarde[2];
+      nouveau[k+7] = ',';
+      k = k+8;
+
+      if (cpt>1&&cpt<10){
+        nouveau[k] = '+';
+        k++;
+        nouveau[k] = (char)(cpt+'0');
+        k++;
+        nouveau[k] = ',';
+        k++;
+      }
+      if (cpt>=10&&cpt<100){
+        nouveau[k] = '+';
+        k++;
+        nouveau[k] = (char)(cpt/10+'0');
+        k ++ ;
+        nouveau[k] = (char)(cpt%10+'0');
+        k++;
+        nouveau[k] = ',';
+        k++;
+      }
+      else if(cpt>=100){
+        nouveau[k] = '+';
+        k++;
+        nouveau[k] = (char)(cpt/100+'0');
+        k ++ ;
+        tempo = cpt%100;
+        nouveau[k] = (char)(tempo/10+'0');
+        k++;
+        nouveau[k] = (char)(cpt%10+'0');
+        k++;
+        nouveau[k] = ',';
+        k++;
+      }
+    }
+
     else {
-      nouveau[k] = entete[i];
-      nouveau[k+1] = ',';
-      k = k +2;
-      i++;
+      if(sauvegarde[1]==','){
+        nouveau[k] = sauvegarde[0];
+        k++;
+        nouveau[k] = ',';
+        k++;
+        i = i +2;
+      }
+      else if(sauvegarde[2]==','){
+        nouveau[k] = sauvegarde[0];
+        k++;
+        nouveau[k] = sauvegarde[1];
+        k++;
+        nouveau[k] = ',';
+        k++;
+        i = i +3 ;
+      }
+      else if(sauvegarde[3]){
+        nouveau[k] = sauvegarde[0];
+        k++;
+        nouveau[k] = sauvegarde[1];
+        k++;
+        nouveau[k] = sauvegarde[2];
+        k++;
+        nouveau[k] = ',';
+        k++;
+        i = i +4 ;
+      }
+      else {
+        nouveau[k] = ',';
+        k++;
+        i++;
+      }
     }
   }
   nouveau[k+1] = '\0';
   return nouveau;
-}
 
+}
 
 void save_compression(char* entete,char* data,int caractereUtile,char* name){
   char name2[strlen(name)+1];
@@ -161,9 +312,9 @@ void save_compression(char* entete,char* data,int caractereUtile,char* name){
   fputs(",",file);
   for(int i=0;i<taille_entete;i++){
     fprintf(file, "%c",entete[i] );
-    }
-    fputs("\n",file);
-      for(int j=0;j<taille_data;j++){
+  }
+  fputs("\n",file);
+  for(int j=0;j<taille_data;j++){
     fprintf(file, "%c",data[j] );
 
   }

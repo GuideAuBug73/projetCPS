@@ -7,7 +7,7 @@ OBJS = $(SRCS: .c=.o)
 all : $(EXEC)
 
 $(EXEC) : 	$(OBJS)
-			$(CC) $(CFLAGS) -o $@ $(OBJS) -lm
+			$(CC) -g $(CFLAGS) -o $@ $(OBJS) -lm
 	
 %.o: %.c
 	$(CC) -o $@ -c $^ $(CFLAGS)

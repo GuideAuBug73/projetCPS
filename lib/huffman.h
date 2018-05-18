@@ -5,6 +5,7 @@ typedef struct _noeud{
     char s;
     char *c;
     int occ;
+    int p;
     struct _noeud *droit;
     struct _noeud *gauche;
 } noeud, *pnoeud;
