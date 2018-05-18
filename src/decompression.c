@@ -113,18 +113,30 @@ enTete_t lectureTableLongueur(char *fichier)
 char* recupData(int offset, char* fichier,enTete_t tete){
   FILE *f = NULL;
   char carac=-1;
+    int compt=0;
   f = fopen(fichier, "r");
-  printf("%d\n",offset );
+  for(int i=0;i<offset+1;i++){
+    fscanf(f,"%c",&carac);
+  }
+  if (f!=NULL){
+    while(!feof(f)){
+      fscanf(f,"%c",&carac);
+      compt++;
+    }
+  }
+
+  fclose(f);
+  f = fopen(fichier, "r");
   for(int i=0;i<offset+1;i++){
     fscanf(f,"%c",&carac);
   }
   //fseek(f,offset+2,SEEK_SET);
-  char* data=malloc(sizeof(char)*tete.profondeur*tete.nombreSymboles);
+  char* data=malloc(sizeof(char)*compt);
+  strcpy(data,"");
   if (f!=NULL){
     int i=0;
     while(!feof(f)){
       fscanf(f,"%c",&carac);
-      //printf("%c\n",carac );
       data[i]=carac;
       i++;
     }
