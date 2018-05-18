@@ -167,7 +167,7 @@ void save_compression(char* entete,char* data,int caractereUtile,char* name){
     fprintf(file, "%c",data[j] );
 
   }
-  //fclose(file);
+  fclose(file);
 }
 
 
@@ -185,7 +185,7 @@ void save_decompression(char* data,char* name){
   for(int j=0;j<taille_data;j++){
     fprintf(file, "%c",data[j] );
   }
-  //fclose(file);
+  fclose(file);
 }
 
 
