@@ -1,1 +1,20 @@
-je ne sais pas si je dois manger ou dormir 
+Les créateurs de logiciels antivirus ayant préalablement identifié et enregistré des informations sur des virus, comme le ferait un dictionnaire, le logiciel antivirus peut ainsi détecter et localiser la présence d’un virus.
+
+On appelle ce dictionnaire la base de définition virale qui contient les signatures de virus.
+
+Lorsque cela se produit, l'antivirus dispose de trois options, il peut :
+
+Effectuer la suppression du fichier contaminé.
+Tenter de réparer le fichier endommagé en éliminant le virus ;
+Déplacer le fichier dans une zone de quarantaine afin qu’il ne puisse être accessible aux autres utilisateurs et logiciels. Ceci permet d'éviter que le virus se répande (par autoréplication), et permet éventuellement de réparer le fichier ultérieurement ;
+Afin de maximiser le rendement de l'antivirus, il est essentiel d’effectuer de fréquentes mises à jour en téléchargeant des versions plus récentes. Des internautes consciencieux et possédant de bonnes connaissances en informatique peuvent identifier eux-mêmes des virus et envoyer leurs informations aux créateurs de logiciels antivirus afin que leur base de données soit mise à jour.
+
+Généralement, les antivirus examinent chaque fichier lorsqu'il est créé, ouvert, fermé ou lu. De cette manière, les virus peuvent être identifiés immédiatement. Il est possible de programmer le système d’administration pour qu’il effectue régulièrement un examen de l'ensemble des fichiers sur l'espace de stockage (disque dur, etc).
+
+Même si les logiciels antivirus sont très performants et régulièrement mis à jour, les créateurs de virus font tout aussi souvent preuve d'inventivité. En particulier, les virus « oligomorphiques », « polymorphiques » et plus récemment, « métamorphiques », sont plus difficiles à détecter.
+
+Une autre technique pour contourner ces définitions virales consiste à utiliser des packers/crypters, le fichier malicieux est chiffré et compressé et déchiffré et décompressé lors de son exécution, un peu à la manière des fichiers zip auto-extractible. Le fait que le fichier est chiffré empêche une détection par signature et permet de démultiplier les fichiers malicieux à partir d'une base unique en changeant de packers/crypters.
+
+Liste blanche
+La « liste blanche » est une technique de plus en plus utilisée pour lutter contre les logiciels malveillants. Au lieu de rechercher les logiciels connus comme malveillants, on empêche l'exécution de tout logiciel à l'exception de ceux qui sont considérés comme fiables par l'administrateur système. En adoptant cette méthode de blocage par défaut, on évite les problèmes inhérents à la mise à jour du fichier de signatures virales. De plus, elle permet d'empêcher l'exécution de logiciels indésirables.
+Étant donné que les entreprises modernes possèdent de nombreuses applications considérées comme fiables, l'efficacité de cette technique dépend de la capacité de l'administrateur à établir et mettre à jour la liste blanche. Cette tâche peut être facilitée par l'utilisation d'outils d'automatisation des processus d'inventaire et de maintenance.
